@@ -50,8 +50,12 @@ class Player {
 		this.rotationAngle += this.turnDirection * this.rotationSpeed;
 		
 		let moveStep = this.walkDirection * this.moveSpeed;
-		this.x += moveStep * Math.cos(this.rotationAngle); 
-		this.y += moveStep * Math.sin(this.rotationAngle); 
+		let newX = this.x + moveStep * Math.cos(this.rotationAngle); 
+		let newY = this.y + moveStep * Math.sin(this.rotationAngle); 
+		if (grid.grid[Math.floor(newY / 32)][Math.floor(newX / 32)] == 0) {
+			this.x = newX;
+			this.y = newY;
+		}
 	}
 	render() {
 		noStroke();
